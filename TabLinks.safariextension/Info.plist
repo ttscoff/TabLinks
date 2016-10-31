@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Author</key>
+	<string>Brett Terpstra</string>
+	<key>Builder Version</key>
+	<string>12602.2.14.0.7</string>
+	<key>CFBundleDisplayName</key>
+	<string>TabLinks</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.brettterpstra.tablinks</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleShortVersionString</key>
+	<string>3.0.0</string>
+	<key>CFBundleVersion</key>
+	<string>300</string>
+	<key>Chrome</key>
+	<dict>
+		<key>Context Menu Items</key>
+		<array>
+			<dict>
+				<key>Command</key>
+				<string>makeMarkdown</string>
+				<key>Identifier</key>
+				<string>makeMarkdown</string>
+				<key>Title</key>
+				<string>TabLinks</string>
+			</dict>
+		</array>
+		<key>Global Page</key>
+		<string>MarkdownTabs.html</string>
+		<key>Toolbar Items</key>
+		<array>
+			<dict>
+				<key>Command</key>
+				<string>makeMarkdown</string>
+				<key>Identifier</key>
+				<string>makeMarkdown</string>
+				<key>Image</key>
+				<string>TabLinksToolbarIcon.png</string>
+				<key>Label</key>
+				<string>TabLinks</string>
+				<key>Tool Tip</key>
+				<string>List urls of all open tabs as templated list</string>
+			</dict>
+		</array>
+	</dict>
+	<key>Content</key>
+	<dict>
+		<key>Scripts</key>
+		<dict/>
+	</dict>
+	<key>Description</key>
+	<string>Lists open tabs using a template. %u=url, %t=title, %w=window index, %n=tab index, %b=newline</string>
+	<key>DeveloperIdentifier</key>
+	<string>47TRS7H4BH</string>
+	<key>ExtensionInfoDictionaryVersion</key>
+	<string>1.0</string>
+	<key>Permissions</key>
+	<dict>
+		<key>Website Access</key>
+		<dict>
+			<key>Include Secure Pages</key>
+			<true/>
+			<key>Level</key>
+			<string>All</string>
+		</dict>
+	</dict>
+	<key>Update Manifest URL</key>
+	<string>http://brettterpstra.com/instapaperbeyond/brettterpstraplugins.plist</string>
+	<key>Website</key>
+	<string>http://brettterpstra.com</string>
+</dict>
+</plist>

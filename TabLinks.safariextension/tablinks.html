@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>TabLinks</title>
+<!-- <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script> -->
+<script src="jquery.min.js"></script>
+<script src="master.js"></script>
+<link rel="stylesheet" type="text/css" href="tablinks.css" media="all" />
+</head>
+<body>
+<div id="main" class="abs">
+	<div class="abs header_upper chrome_light">
+	  TabLinks
+	</div>
+	<div class="abs header_lower chrome_light">
+
+		<input type="submit" value="Close" class="float_left button" id="closebutton"/>
+	<form id="controls">
+  	<label for="template" title="Click to edit" id="clicktoedit">Template: <input type="text" id="template" name="template" /><span class="annotation">(Click to edit)</span></label>
+    <div id="edittemplate" style="display: none">
+    <input type="submit" value="Save/Apply" class="button" id="savebutton"/>
+		<input type="reset" value="Cancel" class="button" id="resetbutton"/>
+    </form>
+    </div>
+    <input type="submit" value="Presets" class="button float_right" id="presetsbutton"/>
+	</div>
+	<div id="main_content" class="abs">
+		<div id="main_content_inner">
+
+      <pre id="linkoutput">
+      </pre>
+		</div>
+	</div>
+	<div class="abs footer_lower chrome_light">
+		<input type="submit" class="button" id="selectall" value="Select All"/>
+    <input type="submit" class="button" id="tonvalt" value="nvALT" style="display:none"/>
+	</div>
+</div>
+<div id="presets" style="display:none">
+  <p>Click a template to copy it to the template field.</p>
+  <dl>
+    <dt>Markdown Links</dt>
+    <dd>- [%t](%u)</dd>
+    <dt>Markdown References</dt>
+    <dd>[%w-%n]: %u "%t"</dd>
+    <dt>HTML</dt>
+    <dd>&lt;a href="%u"&gt;%t&lt;/a&gt;</dd>
+    <dt>Text</dt>
+    <dd>%t%b%u%b</dd>
+  </dl>
+
+</div>
+<div id="variables" style="display:none">
+<ul>
+      <li>%u = url</li>
+      <li>%t = title</li>
+      <li>%w = window index</li>
+      <li>%n = tab index</li>
+      <li>%b = newline</li>
+</ul>
+</div>
+<script type="text/javascript" charset="utf-8">
+function selectAll(force) {
+    if ($('#presets').is(':visible')) {
+      $('#presets').fadeOut('fast');
+    }
+    var $text = $('#linkoutput');
+    var text = $text.get(0);
+    var range,selection;
+    selection = window.getSelection();
+    if (selection.type != 'Range' || force) {
+      selection.setBaseAndExtent(text, 0, text, $text.children().length + 1);
+    }
+}
+function resetTemplateField() {
+  $('#template').css('width', (($('#template').val().length + 1) * 8) + 'px');
+}
+
+$(document).ready(function() {
+  safari.self.tab.dispatchMessage('shownvALTButton', null);
+
+  $('#linkoutput').bind('dblclick',function(){
+    $(this).unbind('click').attr('contentEditable','true').css('background','#fff').blur(function(){
+      $(this).attr('contentEditable','false').css('background','#fefefe').click(function(){
+        selectAll(false);
+      });
+    });
+  });
+  $('#linkoutput,#selectall').click(function(){
+    if ($(this).attr('id') == 'selectall')
+      selectAll(true);
+    else
+      selectAll(false);
+  });
+  $('#tonvalt').click(function () {
+    var content = encodeURIComponent($('#linkoutput').html().replace(/\n/g,"  \n")),
+      rightNow = new Date(),
+      dateString = encodeURIComponent('Tablinks ' + rightNow.toLocaleString()),
+      nvURL = 'nvalt://make/?title=' + dateString + '&txt=' + content;
+    console.log(nvURL);
+    window.location = nvURL;
+  });
+
+  safari.self.tab.dispatchMessage('ready', null);
+  $('#savebutton').click(function(){
+    safari.self.tab.dispatchMessage('saveTemplate', $('#template').val());
+    $('#edittemplate').fadeOut('fast');
+    $('#template').blur();
+    $('#presets').fadeOut('fast');
+  });
+  $('#template').focus(function(){
+    $(this).css('width', '300px');
+    $('#variables').slideDown('fast');
+    $(document).bind('click', function(e){
+      console.log(e.target.tagName);
+      if (e.target.tagName !== 'INPUT') {
+        resetTemplateField();
+        $(document).unbind('click');
+      }
+    })
+  });
+  $('#template').submit(function(){
+    safari.self.tab.dispatchMessage('saveTemplate', $('#template').val());
+    // $(this).css('width', ((this.value.length + 1) * 8) + 'px');
+    // $('#edittemplate').fadeOut('fast');
+  });
+  $('#template').blur(function(){
+    $('#variables').slideUp('fast');
+  });
+
+  $('#resetbutton').click(function(){
+    safari.self.tab.dispatchMessage('resetTemplate', null);
+    $('#edittemplate').hide();
+    resetTemplateField();
+
+  });
+  $('#presetsbutton').click(function(){
+    if ($('#presets').is(':visible')) {
+      $('#presets').fadeOut('fast');
+    } else {
+      $('#presets').fadeIn('fast');
+    }
+  });
+  $('#clicktoedit,#template').click(function () {
+    $('.annotation', this).hide();
+    $('#edittemplate').fadeIn('fast');
+  });
+  $('#presets dt,#presets dd').click(function(ev){
+    var newTemplate;
+    if (ev.target.tagName != 'DD') {
+      newTemplate = $(this).next('dd').text();
+    } else {
+      newTemplate = $(this).text();
+    }
+    $('#template').val(newTemplate);
+    // $('#template').css('width', (($('#template').val().length + 1) * 8) + 'px');
+    safari.self.tab.dispatchMessage('saveTemplate', $('#template').val());
+  });
+  $('#closebutton').click(function(){
+    safari.self.tab.dispatchMessage('closeWindow', null);
+  });
+});
+safari.self.addEventListener('message', function (event) {
+	switch (event.name) {
+		case 'populateLinkList':
+			$('#linkoutput').text(event.message);
+			break;
+		case 'populateTemplate':
+		  $('#template').val(event.message).css('width', ((event.message.length + 1) * 8) + 'px');
+		  break;
+    case 'shownvALTButton':
+      if (event.message)
+        $('#tonvalt').show();
+      break;
+		default:
+			break;
+	}
+}, false);
+
+</script>
+</body>
+</html>

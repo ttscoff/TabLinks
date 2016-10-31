@@ -1,0 +1,309 @@
+/* `Basic HTML
+----------------------------------------------------------------------------------------------------*/
+* {
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+html, body {
+	overflow: hidden;
+}
+body {
+
+	/*
+		Pre-load #nav_arrow image.
+	*/
+	background: #000 url(ui/nav_arrow.png) no-repeat -99999px -99999px;
+	color: #000;
+	cursor: default;
+}
+a {
+	color: #06c;
+}
+h1, h2, h3, h4, h5, h6 {
+	font-weight: normal;
+	line-height: 1;
+}
+ol ol, ul ul, ol ul, ul ol {
+	margin-bottom: 0;
+}
+
+/* `Misc
+----------------------------------------------------------------------------------------------------*/
+.abs {
+	position: absolute;
+	top: auto;
+	left: auto;
+	right: auto;
+	bottom: auto;
+}
+.cancel {
+	color: #c00;
+}
+.float_right {
+	float: right;
+}
+.float_left {
+	float: left;
+}
+
+/*
+Added via JS to <textarea> and class="input_full"
+*/
+.input_full_wrap {
+	display: block;
+	padding-right: 8px;
+}
+.gutter_left {
+	padding-left: 20px;
+}
+.gutter_right {
+	padding-right: 20px;
+}
+
+/* `Buttons
+----------------------------------------------------------------------------------------------------*/
+.button {
+	background: transparent;
+	border: solid 1px #ccc;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	color: #555;
+	display: inline-block;
+	font-size: 12px;
+	line-height: 2;
+	margin: 8px 0 0;
+	overflow: hidden;
+	padding: 0 10px;
+	text-decoration: none;
+	height: 2em;
+	-webkit-transition: all .1s ease-in-out;
+	-moz-transition: all .1s ease-in-out;
+	-o-transition: all .1s ease-in-out;
+	transition: all .1s ease-in-out;
+}
+.button:active, .button:hover, .button_active {
+	background-color: rgba(36, 123, 232, 1.00);
+	color: #fff;
+}
+.button.float_right {
+	margin-right: 7px;
+	margin-top: 11px;
+}
+.button.float_left {
+	margin-left: 7px;
+	margin-top: 11px;
+}
+
+/* `Chrome
+----------------------------------------------------------------------------------------------------*/
+.chrome_light {
+	background: #f3f3f3;
+	color: #777;
+}
+.chrome_dark {
+	background: #fafafa;
+}
+.chrome_dark .button {
+	background: #fafafa;
+	border-color: #888;
+}
+.chrome_dark .button:active, .chrome_dark .button_active {
+	background: #000;
+}
+.chrome_dark, .chrome_dark a {
+	color: #fff;
+}
+
+/* `Search
+----------------------------------------------------------------------------------------------------*/
+#q {
+	vertical-align: baseline;
+	width: 220px;
+}
+
+/* `Headers + Footers
+----------------------------------------------------------------------------------------------------*/
+.header_upper, .header_lower, .footer_upper, .footer_lower {
+	line-height: 45px;
+	overflow: hidden;
+	text-align: center;
+	left: 0;
+	right: 0;
+	height: 45px;
+}
+.header_upper, .header_lower {
+	border-bottom: 1px solid #000;
+}
+.footer_upper, .footer_lower {
+	border-top: 1px solid #000;
+}
+.header_upper {
+	font-size: 18px;
+	top: 0;
+	background-color: #C43662;
+	color: #fff;
+}
+.header_lower {
+	top: 46px;
+}
+.footer_upper {
+	bottom: 46px;
+}
+.footer_lower {
+	bottom: 0;
+}
+
+/* `Main
+----------------------------------------------------------------------------------------------------*/
+#main {
+	top: 0;
+	left: 251px;
+	right: 0;
+	bottom: 0;
+	min-width: 250px;
+}
+#main_content {
+	background: #fafafa;
+	color: #333;
+	left: 0;
+	right: 0;
+}
+#main_content_inner {
+
+	/*
+		1px bottom padding = fixes Opera bug.
+	*/
+	padding: 20px 20px 1px;
+}
+#main {
+	left: 0;
+	font-family: "helvetica neue";
+}
+input.greybutton {
+	width: 90px;
+	height: 34px;
+	-webkit-border-radius: 15px;
+	border: 1.50px solid #999;
+	text-align: center;
+	text-indent: 0px;
+	color: #eee;
+	font: bold 18px/24px "Helvetica Neue";
+	margin: 10px 5px 10px 0;
+	float: right;
+}
+input[type=text] {
+	-webkit-border-radius: 6px;
+	height: 16px;
+	padding: 4px;
+	width: 200px;
+	font-size: 14px;
+	color: #888;
+	font-weight: 300;
+	margin-top: 10px;
+	border: solid 1px transparent;
+	background: transparent;
+}
+input[type=text]:focus {
+	-webkit-border-radius: 6px;
+	height: 16px;
+	padding: 4px;
+	width: 200px;
+	font-size: 14px;
+	color: #777;
+	font-weight: 300;
+	margin-top: 10px;
+	border: solid 1px #aaa;
+	background: #fff;
+}
+label {
+	font-size: 14px;
+	color: #666;
+	font-weight: normal;
+}
+pre {
+	background-color: #fff;
+	padding: 25px 5px;
+	border-radius: 8px;
+	-webkit-border-radius: 8px;
+	border: solid 1px #ddd;
+	font: normal 12px/18px "Helvetica Neue";
+	overflow-x: hidden;
+	overflow-y: auto;
+	top: 70px;
+	left: 20px;
+	right: 20px;
+	bottom: 20px;
+	white-space: pre-wrap;
+}
+::-webkit-scrollbar {
+	width: 10px;
+}
+::-webkit-scrollbar:horizontal {
+	display: none;
+}
+::-webkit-scrollbar-track {
+	margin-top: 15px;
+	margin-bottom: 15px;
+	border-width: 21px 0;
+	background: #aaa;
+	-webkit-border-radius: 5px;
+}
+::-webkit-scrollbar-track:disabled {
+	display: none;
+}
+::-webkit-scrollbar-thumb {
+	border-width: 19px 0;
+	min-height: 20px;
+	background: rgba(102, 102, 102, 0.4);
+	opacity: 0.4;
+	-webkit-border-radius: 5px;
+}
+::selection {
+	background: rgba(93, 211, 255, 0.5); /* Safari */
+	color: #333;
+}
+#presets {
+	font-family: "helvetica neue";
+	position: absolute;
+	top: 95px;
+	right: 10px;
+	background: #fff;
+	width: 400px;
+	padding: 5px 20px;
+	-webkit-border-radius: 5px;
+	border: 1px solid #ccc;
+}
+#presets dt {
+	font-weight: bold;
+	font-size: 16px;
+}
+#presets dd {
+	margin: 0 0 10px 15px;
+}
+#controls, #edittemplate {
+	display: inline-block;
+}
+#template, #presets dd {
+	font-family: menlo, "Courier New", monospace;
+}
+
+.annotation {
+	font-size: 12px;
+	color: #bbb;
+}
+#variables {
+	position: absolute;
+	top: 100px;
+	border: solid 1px #ccc;
+	border-radius: 4px;
+	font-family: "helvetica neue";
+	font-weight: 200;
+	width: 300px;
+	background: #fafafa;
+	left: 50%;
+	margin-left: -200px;
+}
+
+#variables ul {
+	list-style: none;
+}
